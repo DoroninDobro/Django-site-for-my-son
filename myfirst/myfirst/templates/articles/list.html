@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Dimka's Achievements {% endblock %}
+
+    {% block content %}
+        
+    {% if list_articles %}
+        {% for a in list_articles %}
+            <div>
+                <h1><a href="{% url 'articles:detail' a.id %}"> {{a.article_title}} </a></h1> 
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+    {% endblock %}

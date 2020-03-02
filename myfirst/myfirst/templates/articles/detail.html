@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} {{article.article_title}} {% endblock %}
+
+{% block content %}
+        
+<h2>{{article.article_title}}</h2>
+
+<p>{{article.article_test}}</p>
+
+<em>{{article.pub_date}}</em>
+
+<hr>
+
+{% if comments_list %}
+
+    {% for c in comments_list %}
+        <p>
+            <strong>{{c.author_name}}</strong>
+            <p>{{c.comment_text}}</p>
+        </p>
+    {% endfor %}
+
+{% else %}
+Nobody has left a comment yet. Be the first one!
+{% endif %}
+
+<hr>
+
+<form action="{% url 'articles:leave_comment' article.id %}" method="POST">
+
+    {% csrf_token %}
+
+    <input type="text" required placeholders="Your Name" name="name"><br>
+    <textarea name="text" required="" placeholders="Text of comment" cols="30" rows="10"></textarea><br>
+    <button type="submit">Done!</button>
+
+</form>
+
+{% endblock %}
